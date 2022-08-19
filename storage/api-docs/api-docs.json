@@ -1,0 +1,320 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Future super REST API",
+        "description": "Документация сервиса",
+        "version": "1.0.0"
+    },
+    "paths": {
+        "/api/v1/notebooks": {
+            "get": {
+                "tags": [
+                    "Notebook"
+                ],
+                "summary": "- получить все записи",
+                "description": "Главная, вывод всех записей постранично",
+                "parameters": [
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "description": "pagination",
+                        "required": false,
+                        "schema": {
+                            "description": "Номер страницы",
+                            "type": "integer",
+                            "minimum": "1"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Все записи"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Notebook"
+                ],
+                "summary": "добавить запись",
+                "description": "Добавляет запись в записную книгу",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "full_name",
+                                    "phone",
+                                    "email"
+                                ],
+                                "properties": {
+                                    "full_name": {
+                                        "type": "string",
+                                        "format": "text",
+                                        "example": "Петров Иван Витальевич"
+                                    },
+                                    "company": {
+                                        "type": "string",
+                                        "format": "text",
+                                        "example": "Яндекс"
+                                    },
+                                    "phone": {
+                                        "type": "string",
+                                        "format": "number",
+                                        "example": "+79774040001"
+                                    },
+                                    "email": {
+                                        "type": "string",
+                                        "format": "email",
+                                        "example": "user@exemple.com"
+                                    },
+                                    "birthday": {
+                                        "type": "string",
+                                        "format": "date",
+                                        "example": "01.01.2001"
+                                    },
+                                    "photo": {
+                                        "type": "string",
+                                        "format": "text",
+                                        "example": "https://exemple.com/foto.jpg"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Ok",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "boolian",
+                                            "example": "true"
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Notebook item Created successfully!"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/notebooks/{id}": {
+            "get": {
+                "tags": [
+                    "Notebook"
+                ],
+                "summary": "получить запись",
+                "description": "Получает запись по ID",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID удаляемой записи",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "minimum": "1"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Ok",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "boolian",
+                                            "example": "true"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Notebook"
+                ],
+                "summary": "отредактировать запись",
+                "description": "Отредактировать запись в записной книге",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID редактируемой записи",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "minimum": "1"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "full_name",
+                                    "phone",
+                                    "email"
+                                ],
+                                "properties": {
+                                    "full_name": {
+                                        "type": "string",
+                                        "format": "text",
+                                        "example": "Петров Иван Витальевич UPDATE"
+                                    },
+                                    "company": {
+                                        "type": "string",
+                                        "format": "text",
+                                        "example": "Яндекс UPDATE"
+                                    },
+                                    "phone": {
+                                        "type": "string",
+                                        "format": "number",
+                                        "example": "+79774040001"
+                                    },
+                                    "email": {
+                                        "type": "string",
+                                        "format": "email",
+                                        "example": "user@exemple.com"
+                                    },
+                                    "birthday": {
+                                        "type": "string",
+                                        "format": "date",
+                                        "example": "01.01.2001"
+                                    },
+                                    "photo": {
+                                        "type": "string",
+                                        "format": "text",
+                                        "example": "https://exemple.com/foto.jpg"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Ok",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "boolian",
+                                            "example": "true"
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Notebook item Updated successfully!"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Notebook"
+                ],
+                "summary": "удалить запись",
+                "description": "Удаляет запись в записной книге",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID удаляемой записи",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "minimum": "1"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Ok",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "boolian",
+                                            "example": "true"
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Notebook item Deleted successfully!"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "Notebook": {
+                "description": "Notebook model",
+                "required": [
+                    "Notebook"
+                ],
+                "properties": {
+                    "notebooks": {
+                        "type": "array",
+                        "items": {
+                            "properties": {
+                                "full_name": {
+                                    "type": "string"
+                                },
+                                "company": {
+                                    "type": "string"
+                                },
+                                "phone": {
+                                    "type": "string"
+                                },
+                                "email": {
+                                    "type": "string"
+                                },
+                                "birthday": {
+                                    "type": "string"
+                                },
+                                "photo": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                },
+                "type": "object"
+            }
+        }
+    }
+}
